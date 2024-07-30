@@ -3,7 +3,7 @@ package gold;
 import java.io.*;
 import java.util.*;
 
-public class Q7569 {
+public class Q7569_토마토_ver1 {
 
 	//static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
@@ -12,7 +12,7 @@ public class Q7569 {
 	static int [][][] depthArr = new int [2][1_000_000][3];
 	static int cnt=0,curCnt=0,two=0;
 	static int row,col,hei, unripe;
-	static int [][] move = {{0,0,-1},{0,0,1},{0,-1,0},{0,1,0},{1,0,0},{-1,0,0}};
+	static int [][] move = {{0,0,-1},{0,0,1},{0,-1,0},{0,1,0},{1,0,0},{- 1,0,0}};
 	public static void main(String args[]) throws IOException
 	{		
 		System.setIn(new FileInputStream("src/gold/input.txt"));
@@ -41,9 +41,8 @@ public class Q7569 {
 				}
 			}
 		}	
-		System.out.println(check(99,99,2));
 		ans = bfs(0);
-		System.out.println("unripe : "+unripe);
+		
 		System.out.println(unripe==0?ans:-1);
 	}
 	
@@ -56,28 +55,11 @@ public class Q7569 {
 			return depth-1;
 		
 		for (int i = 0; i < cnt; i++) {
-				
 			row = depthArr[two][i][0];
 			col = depthArr[two][i][1];
-			hei = depthArr[two][i][2];	
-			System.out.println(Arrays.toString(depthArr[two][i]));
-			if(depth == 397) {
-				System.out.println(row + " "+ col + " " + hei);
-			}
-			
+			hei = depthArr[two][i][2];			
 			for (int j = 0; j < 6; j++) {
-				if(curCnt>=99) {
-					System.out.println("curCnt : "+curCnt);
-					for (int t = 0; t < curCnt; t++) {
-						System.out.println(Arrays.toString(depthArr[(two+1)%2][t]));
-						System.out.println((row+move[3][0]) +" "+(col+move[3][1]) + " "+(hei+move[3][2]));
-						System.out.println(space[row+move[3][0]][col+move[3][1]][hei+move[3][2]]==0);
-					}
-					}
 				if(check(row+move[j][0],col+move[j][1],hei+move[j][2]) && space[row+move[j][0]][col+move[j][1]][hei+move[j][2]]==0) {
-					if(depth == 397) {
-						System.out.println(row+move[j][0] + " "+ col+move[j][1] + " " + hei+move[j][2]);
-					}
 					space[row+move[j][0]][col+move[j][1]][hei+move[j][2]]++;
 					depthArr[(two+1)%2][curCnt][0]=row+move[j][0];
 					depthArr[(two+1)%2][curCnt][1]=col+move[j][1];
@@ -86,13 +68,6 @@ public class Q7569 {
 				}
 			}
 			
-		}
-		
-		if(curCnt>90 && curCnt<=100) {
-		System.out.println("curCnt : "+curCnt);
-		for (int i = 0; i < curCnt; i++) {
-			//System.out.println(Arrays.toString(depthArr[(two+1)%2][i]));
-		}
 		}
 		cnt = curCnt;
 		curCnt = 0;
